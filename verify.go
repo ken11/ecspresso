@@ -333,8 +333,7 @@ func (d *App) verifyRegistryImage(ctx context.Context, image, user, password str
 	}
 	d.DebugLog(fmt.Sprintf("image=%s tag=%s", image, tag))
 
-	repo := registry.New(image, user, password)
-	ok, err := repo.HasImage(tag)
+	ok, err := registry.ExistsImage(ctx, image, user, password)
 	if err != nil {
 		return err
 	}
